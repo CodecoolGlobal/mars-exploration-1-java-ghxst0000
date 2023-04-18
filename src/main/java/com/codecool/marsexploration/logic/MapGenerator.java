@@ -105,22 +105,24 @@ public class MapGenerator {
 
     private void placeResources(TerrainElement resource, int numberOfResourcePoints){
         Set<Coordinate> coordinatesNextToNeighbouringElement = new HashSet<>();
-        for(int i = 0; i < config.height() - 1; i++){
-            for(int j = 0; i < config.width() -1; j++){
-                if ((i - 1 > 0)) { // left
+        // System.out.println(config.height() + " " + config.width());
+        for(int i = 0; i < config.height(); i++){
+            for(int j = 0; j < config.width(); j++){
+                System.out.println("itt " + i + " " + j);
+                if ((i - 1 >= 0)) { // left
                     if (map[i - 1][j] == resource.getNeighbour()) {
                         coordinatesNextToNeighbouringElement.add(new Coordinate(i, j));
                     }
                 } else if(i + 1 < config.height()) {// right
-                    System.out.println(i + " " + config.width());
                     if (map[i + 1][j] == resource.getNeighbour()) {
+                        System.out.println(i + " " + j);
                         coordinatesNextToNeighbouringElement.add(new Coordinate(i, j));
                     }
                 } else if(j + 1 < config.width()) {
                     if(map[i][j + 1] == resource.getNeighbour()) { // up
                         coordinatesNextToNeighbouringElement.add(new Coordinate(i, j));
                     }
-                } else if((j - 1 > 0 )) {
+                } else if((j - 1 >= 0 )) {
                     if(map[i][j - 1] == resource.getNeighbour()){// down
                     coordinatesNextToNeighbouringElement.add(new Coordinate(i, j));
                 }}
