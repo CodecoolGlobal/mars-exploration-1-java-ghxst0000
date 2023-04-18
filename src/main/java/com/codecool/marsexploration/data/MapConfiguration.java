@@ -6,5 +6,5 @@ public record MapConfiguration (
     Integer width,
     Integer height,
     String fileName,
-    Map<TerrainElement, Integer[]> areas
+    Map<TerrainElement, int[]> areas
 ) {}

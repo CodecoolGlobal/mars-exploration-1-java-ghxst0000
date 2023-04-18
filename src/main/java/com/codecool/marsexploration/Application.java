@@ -12,14 +12,14 @@ public class Application {
         Random random = new Random();
 
 
-        String path="src/main/resources/test.map";
+        String path="test.map";
         int width=25;
         int height=25;
-        Map<TerrainElement,Integer[]> areas= Map.of(
-                TerrainElement.WATER,new Integer[]{4,5,6},
-                TerrainElement.PIT,new Integer[]{7,8,9},
-                TerrainElement.MINERAL,new Integer[]{5,8,10},
-                TerrainElement.MOUNTAIN,new Integer[]{10,20,30}
+        Map<TerrainElement, int[]> areas= Map.of(
+                TerrainElement.WATER,new int []{4,5,6},
+                TerrainElement.PIT,new int[]{7,8,9},
+                TerrainElement.MINERAL,new int[]{5,8,10},
+                TerrainElement.MOUNTAIN, new int[]{10,20,30}
                 
         );
 
