@@ -1,5 +1,6 @@
 package com.codecool.marsexploration.logic;
 
+import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.MapConfiguration;
 import com.codecool.marsexploration.data.TerrainElement;
 
@@ -8,15 +9,17 @@ import java.util.*;
 public class MapGenerator {
     private MapConfiguration config;
     private Random random;
+    private Character[][] map;
 
     public MapGenerator(MapConfiguration config, Random random) {
         this.config = config;
         this.random = random;
+        this.map = new Character[config.height()][config.width()];
+
     }
 
     public Character[][] generate() {
-        Character[][] terrain = new Character[config.height()][config.width()];
-        for (Character[] row : terrain) {
+        for (Character[] row : map) {
             Arrays.fill(row, ' ');
         }
 
@@ -35,34 +38,34 @@ public class MapGenerator {
         //placeAreas()
         //!hasArea -> placeResources()
 
-        return terrain;
+        return map;
     }
 
     private Character[][] generateAreas(TerrainElement symbol, Integer index) {
         int numberOfSymbols = config.areas().get(symbol)[index];
-        Integer size = (int) Math.ceil(Math.sqrt(numberOfSymbols));
+        Integer size = (int) Math.ceil(Math.sqrt(numberOfSymbols)) + 1;
         Character[][] area = new Character[size][size];
         for(Character[] row : area) {
-            Arrays.fill(row,' ');
+            Arrays.fill(row, symbol.getSign());
         }
 
-        int counter = 0;
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                counter++;
-                if(counter == numberOfSymbols) {
-                    printArea(area);
-                    return area;
-                }
-                area[i][j] = symbol.getSign();
-            }
+
+        Set<Coordinate> randomChoices = new HashSet<Coordinate>();
+        while (randomChoices.size() < Math.pow(size, 2) - numberOfSymbols) {
+            randomChoices.add(new Coordinate(random.nextInt(size), random.nextInt(size)));
         }
+
+        for (Coordinate coord : randomChoices) {
+            area[coord.x()][coord.y()] = ' ';
+        }
+
+        printArea(area);
 
         return area;
     }
 
     private void placeAreas(Character[][] terrain, List<Character[][]> areas){
-
+        
     }
 
     private void printArea(Character[][] area) {
