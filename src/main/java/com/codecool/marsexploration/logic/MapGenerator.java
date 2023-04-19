@@ -21,7 +21,6 @@ public class MapGenerator {
         this.random = random;
         this.map = new Character[config.height()][config.width()];
         this.generatingStrategy = generatingStrategy;
-
     }
 
     public Character[][] generate() {
@@ -52,7 +51,6 @@ public class MapGenerator {
             }
         }
 
-        printArea(map);
         writeFile(map);
         return map;
     }
@@ -130,16 +128,6 @@ public class MapGenerator {
             }
         }
         return true;
-    }
-
-    private void printArea(Character[][] area) {
-        for (Character[] row : area) {
-            for (Character c : row) {
-                System.out.print(c);
-            }
-            System.out.println();
-        }
-        System.out.println("\n\n");
     }
 
     private void writeFile(Character[][] map){
