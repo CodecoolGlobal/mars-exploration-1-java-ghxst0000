@@ -2,9 +2,9 @@ package com.codecool.marsexploration;
 
 import com.codecool.marsexploration.data.MapConfiguration;
 import com.codecool.marsexploration.data.TerrainElement;
-import com.codecool.marsexploration.logic.InorderAreaShaper;
-import com.codecool.marsexploration.logic.MapGenerator;
-import com.codecool.marsexploration.logic.RandomAreaShaper;
+import com.codecool.marsexploration.logic.generating_strategy.InorderAreaShaper;
+import com.codecool.marsexploration.logic.map_generator.MapGenerator;
+import com.codecool.marsexploration.logic.generating_strategy.RandomAreaShaper;
 
 import java.util.Map;
 import java.util.Random;

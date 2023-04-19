@@ -1,4 +1,4 @@
-package com.codecool.marsexploration.logic;
+package com.codecool.marsexploration.logic.generating_strategy;
 
 import com.codecool.marsexploration.data.MapConfiguration;
 import com.codecool.marsexploration.data.TerrainElement;
