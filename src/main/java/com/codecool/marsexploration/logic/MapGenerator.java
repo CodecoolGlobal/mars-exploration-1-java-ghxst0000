@@ -27,6 +27,7 @@ public class MapGenerator {
             Arrays.fill(row, ' ');
         }
 
+        //hasArea -> generateAreas()
         List<Character[][]> areas = new ArrayList<>();
 
         for (Map.Entry<TerrainElement, int[]> element : config.areas().entrySet()) {
@@ -37,7 +38,10 @@ public class MapGenerator {
             }
         }
 
-        //hasArea -> generateAreas()
+        //placeAreas()
+        areas.forEach(area->placeArea(area));
+
+        //!hasArea -> placeResources()
         for (Map.Entry<TerrainElement, int[]> element : config.areas().entrySet()) {
             if (!element.getKey().hasArea()) {
                 for (int i = 0; i < element.getValue().length; i++) {
@@ -46,9 +50,6 @@ public class MapGenerator {
             }
         }
 
-        areas.forEach(area->placeArea(area));
-        //placeAreas()
-        //!hasArea -> placeResources()
         printArea(map);
         writeFile(map);
         return map;
@@ -105,36 +106,36 @@ public class MapGenerator {
 
     private void placeResources(TerrainElement resource, int numberOfResourcePoints){
         Set<Coordinate> coordinatesNextToNeighbouringElement = new HashSet<>();
-        // System.out.println(config.height() + " " + config.width());
-        for(int i = 0; i < config.height(); i++){
-            for(int j = 0; j < config.width(); j++){
-                System.out.println("itt " + i + " " + j);
-                if ((i - 1 >= 0)) { // left
+        System.out.println("number of resource points: " + numberOfResourcePoints);
+        for(int i = 0; i < config.height(); i++){ // nem kell a height-böl kivonni 1-et
+            for(int j = 0; j < config.width(); j++){ // nem kell a width-böl kivonni 1-et
+                if ((i - 1 >= 0)) { // left - greater OR EQUAL
                     if (map[i - 1][j] == resource.getNeighbour()) {
                         coordinatesNextToNeighbouringElement.add(new Coordinate(i, j));
                     }
-                } else if(i + 1 < config.height()) {// right
+                } else if(i + 1 < config.height()) { // right
                     if (map[i + 1][j] == resource.getNeighbour()) {
-                        System.out.println(i + " " + j);
                         coordinatesNextToNeighbouringElement.add(new Coordinate(i, j));
                     }
-                } else if(j + 1 < config.width()) {
-                    if(map[i][j + 1] == resource.getNeighbour()) { // up
+                } else if(j + 1 < config.width()) { // up
+                    if(map[i][j + 1] == resource.getNeighbour()) {
                         coordinatesNextToNeighbouringElement.add(new Coordinate(i, j));
                     }
-                } else if((j - 1 >= 0 )) {
-                    if(map[i][j - 1] == resource.getNeighbour()){// down
+                } else if((j - 1 >= 0 )) { // down  - greater OR EQUAL
+                    if(map[i][j - 1] == resource.getNeighbour()){
                     coordinatesNextToNeighbouringElement.add(new Coordinate(i, j));
                 }}
             }
         }
         List<Coordinate> list=new ArrayList<>(coordinatesNextToNeighbouringElement);
-        try {
+        try{
             for(int i = 0; i < numberOfResourcePoints; i++){
                 Integer randomIndex = random.nextInt(list.size());
                 Coordinate randomCoordinate = list.get(randomIndex);
                 map[randomCoordinate.x()][randomCoordinate.y()] = resource.getSign();
-                list.remove(randomIndex);
+                System.out.println(randomCoordinate.x() + " " + randomCoordinate.y());
+                list.remove(randomCoordinate); // not list.remove(randomIndex)!
+                System.out.println(list.size());
             }
         } catch (Exception e){
             System.out.println("can't place all resources");

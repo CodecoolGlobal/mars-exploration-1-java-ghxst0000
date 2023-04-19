@@ -16,7 +16,7 @@ public class Application {
         int width=25;
         int height=25;
         Map<TerrainElement, int[]> areas= Map.of(
-                TerrainElement.WATER,new int []{4,5,6},
+                TerrainElement.WATER,new int []{4,5,60},
                 TerrainElement.PIT,new int[]{7,8,9},
                 TerrainElement.MINERAL,new int[]{5,8,10},
                 TerrainElement.MOUNTAIN, new int[]{10,20,30}
