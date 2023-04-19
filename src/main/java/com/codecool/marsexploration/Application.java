@@ -2,7 +2,9 @@ package com.codecool.marsexploration;
 
 import com.codecool.marsexploration.data.MapConfiguration;
 import com.codecool.marsexploration.data.TerrainElement;
+import com.codecool.marsexploration.logic.InorderAreaShaper;
 import com.codecool.marsexploration.logic.MapGenerator;
+import com.codecool.marsexploration.logic.RandomAreaShaper;
 
 import java.util.Map;
 import java.util.Random;
@@ -11,10 +13,12 @@ public class Application {
     public static void main(String[] args) {
         Random random = new Random();
 
+        String path1="test1.map";
+        String path2="test2.map";
 
-        String path="test.map";
         int width=25;
         int height=25;
+
         Map<TerrainElement, int[]> areas= Map.of(
                 TerrainElement.WATER,new int []{4,5,60},
                 TerrainElement.PIT,new int[]{7,8,9},
@@ -23,12 +27,18 @@ public class Application {
                 
         );
 
-        MapConfiguration map=new MapConfiguration(width,height,path,areas);
+        MapConfiguration map1Configuration = new MapConfiguration(width,height,path1,areas);
+        MapConfiguration map2Configuration = new MapConfiguration(width,height,path2,areas);
 
-        MapGenerator generator=new MapGenerator(map,random);
-        
+
+        MapGenerator generator = new MapGenerator(map1Configuration,random, new RandomAreaShaper());
+        System.out.println("Map 1");
         generator.generate();
 
-
+        System.out.println("-".repeat(40));
+        System.out.println("Map 2");
+        generator.setConfig(map2Configuration);
+        generator.setGeneratingStrategy(new InorderAreaShaper());
+        generator.generate();
     }
 }
