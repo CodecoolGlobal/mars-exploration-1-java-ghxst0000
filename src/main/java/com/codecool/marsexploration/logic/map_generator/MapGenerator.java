@@ -58,7 +58,6 @@ public class MapGenerator {
             }
         }
 
-        printArea(map);
         writeFile(map);
         return map;
     }
@@ -142,8 +141,9 @@ public class MapGenerator {
         System.out.println("\n\n");
     }
 
-    private void writeFile(Character[][] map) {
-        BufferedWriter writer = null;
+
+    private void writeFile(Character[][] map){
+        BufferedWriter writer= null;
         try {
             writer = new BufferedWriter(new FileWriter("src/main/resources/" + config.fileName()));
             writer.write(utils.convert2DArrayToString(map));
