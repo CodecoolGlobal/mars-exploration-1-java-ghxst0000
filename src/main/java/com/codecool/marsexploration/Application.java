@@ -10,7 +10,6 @@ import java.util.Random;
 public class Application {
     public static void main(String[] args) {
         Random random = new Random();
-
         UI ui = new UI();
         MapConfiguration config = ui.getParametersForMapConfiguration(random);
         MapGenerator generator = new MapGenerator(config, random, new RandomAreaShaper());
