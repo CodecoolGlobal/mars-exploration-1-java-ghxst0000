@@ -11,27 +11,27 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class UI {
-    private   <T> T choice(String[] choiceText, T[] choices, String  prefix) {
+    private <T> T choice(String[] choiceText, T[] choices, String prefix) {
         int choice = -1;
 
         for (int i = 0; i < choiceText.length; i++) {
             System.out.println(i + " - " + choiceText[i]);
         }
 
-        while(choice < 0  || choice > choices.length) {
+        while (choice < 0 || choice > choices.length) {
             choice = getInputInt(prefix);
         }
 
         return choices[choice];
     }
 
-    private   String getInputString(String prefix) {
+    private String getInputString(String prefix) {
         System.out.print(prefix);
         Scanner scanner = new Scanner(System.in);
         return scanner.next();
     }
 
-    private   int getInputInt(String prefix) {
+    private int getInputInt(String prefix) {
         System.out.print(prefix);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
@@ -51,8 +51,8 @@ public class UI {
         String path = getInputString("Specify an output name: ");
 
         GeneratingStrategy strategy = choice(
-                new String[]{ "Random Area Shaper", "In-order Area Shaper" },
-                new GeneratingStrategy[]{ new RandomAreaShaper(), new InorderAreaShaper() },
+                new String[]{"Random Area Shaper", "In-order Area Shaper"},
+                new GeneratingStrategy[]{new RandomAreaShaper(), new InorderAreaShaper()},
                 "Chose a number: "
         );
 
@@ -82,11 +82,11 @@ public class UI {
             mountainArray[i] = random.nextInt(minMountainSize, maxMountainSize);
         }
 
-        Map<TerrainElement, int[]> areas= Map.of(
-                TerrainElement.WATER,     new int[] { waterAmount },
-                TerrainElement.MINERAL,   new int[] { mineralAmount },
-                TerrainElement.PIT,       pitArray,
-                TerrainElement.MOUNTAIN,  mountainArray
+        Map<TerrainElement, int[]> areas = Map.of(
+                TerrainElement.WATER, new int[]{waterAmount},
+                TerrainElement.MINERAL, new int[]{mineralAmount},
+                TerrainElement.PIT, pitArray,
+                TerrainElement.MOUNTAIN, mountainArray
         );
         return new MapConfiguration(width, height, path, areas);
     }

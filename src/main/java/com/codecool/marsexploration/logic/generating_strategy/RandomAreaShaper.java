@@ -6,13 +6,13 @@ import com.codecool.marsexploration.data.TerrainElement;
 
 import java.util.*;
 
-public class RandomAreaShaper extends GeneratingStrategy{
+public class RandomAreaShaper extends GeneratingStrategy {
     @Override
     public Character[][] generateAreas(TerrainElement symbol, Integer index, MapConfiguration config, Random random) {
         int numberOfSymbols = config.areas().get(symbol)[index];
         Integer size = (int) Math.ceil(Math.sqrt(numberOfSymbols)) + 1;
         Character[][] area = new Character[size][size];
-        for(Character[] row : area) {
+        for (Character[] row : area) {
             Arrays.fill(row, symbol.getSign());
         }
 

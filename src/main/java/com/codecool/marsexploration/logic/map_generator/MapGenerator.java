@@ -85,9 +85,9 @@ public class MapGenerator {
         } catch (Exception e) {
             System.out.println("unable to place area");
         }
-        if (attempts >= (config.width() - area.length) * (config.height() - area.length)) {
+       /* if (attempts >= (config.width() - area.length) * (config.height() - area.length)) {
             System.out.println("can't fit area");
-        }
+        }*/
     }
 
     private void placeResources(TerrainElement resource, int numberOfResourcePoints) {
@@ -131,19 +131,8 @@ public class MapGenerator {
         }
     }
 
-    private void printArea(Character[][] area) {
-        for (Character[] row : area) {
-            for (Character c : row) {
-                System.out.print(c);
-            }
-            System.out.println();
-        }
-        System.out.println("\n\n");
-    }
-
-
-    private void writeFile(Character[][] map){
-        BufferedWriter writer= null;
+    private void writeFile(Character[][] map) {
+        BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter("src/main/resources/" + config.fileName()));
             writer.write(utils.convert2DArrayToString(map));
@@ -151,13 +140,5 @@ public class MapGenerator {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void setConfig(MapConfiguration config) {
-        this.config = config;
-    }
-
-    public void setGeneratingStrategy(GeneratingStrategy generatingStrategy) {
-        this.generatingStrategy = generatingStrategy;
     }
 }
