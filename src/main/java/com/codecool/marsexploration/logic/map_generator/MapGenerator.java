@@ -105,13 +105,13 @@ public class MapGenerator {
                 }
             }
         }
-        List<Coordinate> list = new ArrayList<>(coordinatesNextToNeighbouringElement);
+        List<Coordinate> resourceCoordinates = new ArrayList<>(coordinatesNextToNeighbouringElement);
         try {
             for (int i = 0; i < numberOfResourcePoints; i++) {
-                Integer randomIndex = random.nextInt(list.size());
-                Coordinate randomCoordinate = list.get(randomIndex);
+                Integer randomIndex = random.nextInt(resourceCoordinates.size());
+                Coordinate randomCoordinate = resourceCoordinates.get(randomIndex);
                 map[randomCoordinate.x()][randomCoordinate.y()] = resource.getSign();
-                list.remove(randomCoordinate);
+                resourceCoordinates.remove(randomCoordinate);
             }
         } catch (Exception e) {
             System.out.println("can't place all resources");
