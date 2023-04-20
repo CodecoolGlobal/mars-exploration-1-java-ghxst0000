@@ -62,7 +62,7 @@ public class UI {
         int waterAmount = getInputInt("Amount of water: ");
         int mineralAmount = getInputInt("Amount of mineral: ");
 
-        int pitCount = getInputInt("Number of pits");
+        int pitCount = getInputInt("Number of pits: ");
         int minPitSize = getInputInt("Minimum pit size: ");
         int maxPitSize = getInputInt("Maximum pit size: ");
 
@@ -72,7 +72,7 @@ public class UI {
             pitArray[i] = random.nextInt(minPitSize, maxPitSize);
         }
 
-        int mountainCount = getInputInt("Number of mountains");
+        int mountainCount = getInputInt("Number of mountains: ");
         int minMountainSize = getInputInt("Minimum mountain size: ");
         int maxMountainSize = getInputInt("Minimum mountain size: ");
 

@@ -3,12 +3,8 @@ package com.codecool.marsexploration.logic.map_generator;
 import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.MapConfiguration;
 import com.codecool.marsexploration.data.TerrainElement;
-import com.codecool.marsexploration.logic.filewriter.FileWriter;
 import com.codecool.marsexploration.logic.generating_strategy.GeneratingStrategy;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -18,16 +14,13 @@ public class MapGenerator {
     private Character[][] map;
     private GeneratingStrategy generatingStrategy;
     private ConfigurationValidator validator;
-    private FileWriter fileWriter;
 
     public MapGenerator(MapConfiguration config, Random random, GeneratingStrategy generatingStrategy) {
         this.config = config;
         this.random = random;
         this.map = new Character[config.height()][config.width()];
         this.generatingStrategy = generatingStrategy;
-        this.fileWriter=new FileWriter();
         this.validator = new ConfigurationValidator();
-
     }
 
     public Character[][] generate() {
@@ -57,8 +50,6 @@ public class MapGenerator {
                 }
             }
         }
-
-        fileWriter.writeFile(map,config);
         return map;
     }
 
@@ -84,9 +75,6 @@ public class MapGenerator {
         } catch (Exception e) {
             System.out.println("unable to place area");
         }
-       /* if (attempts >= (config.width() - area.length) * (config.height() - area.length)) {
-            System.out.println("can't fit area");
-        }*/
     }
 
     private void placeResources(TerrainElement resource, int numberOfResourcePoints) {

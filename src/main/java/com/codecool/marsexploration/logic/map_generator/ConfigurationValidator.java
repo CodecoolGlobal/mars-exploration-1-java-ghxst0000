@@ -2,7 +2,7 @@ package com.codecool.marsexploration.logic.map_generator;
 
 import com.codecool.marsexploration.data.Coordinate;
 
-class ConfigurationValidator { // no class access modifier = package private
+class ConfigurationValidator {
 
     public boolean isAreaPlacable(Character[][] map, Character[][] area, Coordinate origin) {
         for (int i = origin.x(); i < origin.x() + area.length; i++) {

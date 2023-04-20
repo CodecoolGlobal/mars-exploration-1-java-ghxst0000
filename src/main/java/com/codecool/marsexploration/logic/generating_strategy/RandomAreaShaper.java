@@ -16,7 +16,6 @@ public class RandomAreaShaper extends GeneratingStrategy {
             Arrays.fill(row, symbol.getSign());
         }
 
-
         Set<Coordinate> randomChoices = new HashSet<Coordinate>();
         while (randomChoices.size() < Math.pow(size, 2) - numberOfSymbols) {
             randomChoices.add(new Coordinate(random.nextInt(size), random.nextInt(size)));
