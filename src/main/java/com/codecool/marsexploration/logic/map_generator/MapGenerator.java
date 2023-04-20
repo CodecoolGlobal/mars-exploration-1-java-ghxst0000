@@ -3,11 +3,11 @@ package com.codecool.marsexploration.logic.map_generator;
 import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.MapConfiguration;
 import com.codecool.marsexploration.data.TerrainElement;
-import com.codecool.marsexploration.logic.Utils;
+import com.codecool.marsexploration.logic.filewriter.FileWriter;
 import com.codecool.marsexploration.logic.generating_strategy.GeneratingStrategy;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.IntStream;
@@ -17,15 +17,15 @@ public class MapGenerator {
     private Random random;
     private Character[][] map;
     private GeneratingStrategy generatingStrategy;
-    private Utils utils;
     private ConfigurationValidator validator;
+    private FileWriter fileWriter;
 
     public MapGenerator(MapConfiguration config, Random random, GeneratingStrategy generatingStrategy) {
         this.config = config;
         this.random = random;
         this.map = new Character[config.height()][config.width()];
         this.generatingStrategy = generatingStrategy;
-        this.utils = new Utils();
+        this.fileWriter=new FileWriter();
         this.validator = new ConfigurationValidator();
 
     }
@@ -58,10 +58,9 @@ public class MapGenerator {
             }
         }
 
-        writeFile(map);
+        fileWriter.writeFile(map,config);
         return map;
     }
-
 
     private void placeArea(Character[][] area) {
         boolean placeable = false;
@@ -128,17 +127,6 @@ public class MapGenerator {
             }
         } catch (Exception e) {
             System.out.println("can't place all resources");
-        }
-    }
-
-    private void writeFile(Character[][] map) {
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter("src/main/resources/" + config.fileName()));
-            writer.write(utils.convert2DArrayToString(map));
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 }
